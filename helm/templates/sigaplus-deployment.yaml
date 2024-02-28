@@ -20,22 +20,6 @@ spec:
         name: sigaplus
         ports:
         - containerPort: 8081
-        startupProbe:
-          httpGet:
-            path: /students/heartbeat
-            port: 8081
-          initialDelaySeconds: 30
-        livenessProbe:
-          httpGet:
-            path: /students/heartbeat
-            port: 8081
-          periodSeconds: 5
-        readinessProbe:
-          httpGet:
-            path: /students/123
-            port: 8081
-          initialDelaySeconds: 30 
-          periodSeconds: 5
         resources: 
           requests:
             cpu: "100m"
