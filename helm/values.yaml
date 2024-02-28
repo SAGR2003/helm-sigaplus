@@ -1,4 +1,4 @@
 env:
-  APP_VERSION: 2
+  APP_VERSION: 4
 service:
   port: 8081
