@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: sigaplus
+  name: sigaplus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sigaplus
+  template:
+    metadata:
+      labels:
+        app: sigaplus
+    spec:
+      containers:
+      - image: sagr2003/sigaplus:{{ .Values.env.APP_VERSION }}
+        name: sigaplus
+        ports:
+        - containerPort: 8081
+        startupProbe:
+          httpGet:
+            path: /students/heartbeat
+            port: 8081
+          initialDelaySeconds: 30
+        livenessProbe:
+          httpGet:
+            path: /students/heartbeat
+            port: 8081
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /students/123
+            port: 8081
+          initialDelaySeconds: 30 
+          periodSeconds: 5
+        resources: 
+          requests:
+            cpu: "100m"
+            memory: "400Mi"
+          limits:
+            cpu: "200m"
+            memory: "600Mi"
